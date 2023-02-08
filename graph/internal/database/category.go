@@ -28,7 +28,7 @@ func (c *Category) Create(name string, description string) (Category, error) {
 	return Category{ID: id, Name: name, Description: description}, nil
 }
 
-func (c *Category) findAll() ([]Category, error) {
+func (c *Category) FindAll() ([]Category, error) {
 	rows, err := c.db.Query("Select id, name, description from categories")
 	if err != nil {
 		return nil, err
