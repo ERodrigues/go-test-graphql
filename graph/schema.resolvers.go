@@ -42,7 +42,7 @@ func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, erro
 		categoriesModel = append(categoriesModel, &model.Category{
 			ID:          category.ID,
 			Name:        category.Name,
-			Description: category.Description,
+			Description: &category.Description,
 		})
 	}
 
