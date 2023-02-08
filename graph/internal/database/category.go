@@ -35,7 +35,7 @@ func (c *Category) findAll() ([]Category, error) {
 	}
 	defer rows.Close()
 
-	categories, err := []Category{}
+	categories := []Category{}
 	for rows.Next() {
 		var id, name, description string
 
