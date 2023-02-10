@@ -36,7 +36,6 @@ func (r *mutationResolver) CreateCourse(ctx context.Context, input model.NewCour
 		ID:          course.ID,
 		Name:        course.Name,
 		Description: &course.Description,
-		Category:    course.Category,
 	}, nil
 }
 
