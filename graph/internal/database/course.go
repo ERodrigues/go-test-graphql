@@ -11,21 +11,21 @@ type Course struct {
 	ID          string
 	Name        string
 	Description string
-	Category    *Category
+	CategoryID  string
 }
 
 func NewCourse(db *sql.DB) *Course {
 	return &Course{db: db}
 }
 
-func (c *Course) Create(name string, description string, categoryID string) (Course, error) {
+func (c *Course) Create(name string, description string, categoryID string) (*Course, error) {
 	id := uuid.New().String()
 
-	_, err := c.db.Exec("Insert into categories (id, name, description, category) values ($1, $2, $3, $4)", id, name, description, categoryID)
+	_, err := c.db.Exec("Insert into course (id, name, description, categoryId) values ($1, $2, $3, $4)", id, name, description, categoryID)
 
 	if err != nil {
-		return Course{}, err
+		return nil, err
 	}
 
-	return Course{ID: id, Name: name, Description: description, Category: category}, nil
+	return &Course{ID: id, Name: name, Description: description, CategoryID: categoryID}, nil
 }
