@@ -28,3 +28,21 @@ func (c *Course) Create(name string, description string, categoryID string) (*Co
 
 	return &Course{ID: id, Name: name, Description: description, CategoryID: categoryID}, nil
 }
+
+func (c *Course) FindAll() ([]Course, error) {
+	rows, err := c.db.Query("Select id, name, description, categoryID from courses")
+	if err != nil {
+		return nil, err
+	}
+
+	courses := []Course{}
+	for rows.Next() {
+		var id, name, description, categoryID string
+		if err := rows.Scan(&id, &name, &description, &categoryID); err != nil {
+			return nil, err
+		}
+		courses = append(courses, Course{ID: id, Name: name, Description: description, CategoryID: categoryID})
+	}
+
+	return courses, nil
+}
